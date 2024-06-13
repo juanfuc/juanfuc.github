@@ -9,7 +9,7 @@
 	},
 	"devDependencies": {
 	  "@iconify/svelte": "^4.0.2",
-	  "@sveltejs/adapter-auto": "^3.0.0",
+	  "@sveltejs/adapter-static": "^3.0.1",
 	  "@sveltejs/kit": "^2.0.0",
 	  "@sveltejs/vite-plugin-svelte": "^3.0.0",
 	  "svelte": "^4.2.7",
@@ -17,7 +17,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-	  "@sveltejs/adapter-static": "^3.0.1",
 	  "d3": "^7.9.0",
 	  "svelte-routing": "^2.13.0",
 	  "svelte-spa-router": "^4.0.1"
