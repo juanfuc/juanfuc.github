@@ -11,7 +11,7 @@ const config = {
       strict: true
     }),
     paths: {
-      base: ''
+      base: '' // No necesitas una base adicional
     }
   }
 };
