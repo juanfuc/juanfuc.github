@@ -1,0 +1,121 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/experiencia",
+			"dest": "/experiencia/"
+		},
+		{
+			"src": "/experiencia/",
+			"status": 308,
+			"headers": {
+				"Location": "/experiencia"
+			}
+		},
+		{
+			"src": "/perfil",
+			"dest": "/perfil/"
+		},
+		{
+			"src": "/perfil/",
+			"status": 308,
+			"headers": {
+				"Location": "/perfil"
+			}
+		},
+		{
+			"src": "/programacion",
+			"dest": "/programacion/"
+		},
+		{
+			"src": "/programacion/",
+			"status": 308,
+			"headers": {
+				"Location": "/programacion"
+			}
+		},
+		{
+			"src": "/publicaciones",
+			"dest": "/publicaciones/"
+		},
+		{
+			"src": "/publicaciones/",
+			"status": 308,
+			"headers": {
+				"Location": "/publicaciones"
+			}
+		},
+		{
+			"src": "/publicaciones/articulos",
+			"dest": "/publicaciones/articulos/"
+		},
+		{
+			"src": "/publicaciones/articulos/",
+			"status": 308,
+			"headers": {
+				"Location": "/publicaciones/articulos"
+			}
+		},
+		{
+			"src": "/publicaciones/capitulos",
+			"dest": "/publicaciones/capitulos/"
+		},
+		{
+			"src": "/publicaciones/capitulos/",
+			"status": 308,
+			"headers": {
+				"Location": "/publicaciones/capitulos"
+			}
+		},
+		{
+			"src": "/publicaciones/libros",
+			"dest": "/publicaciones/libros/"
+		},
+		{
+			"src": "/publicaciones/libros/",
+			"status": 308,
+			"headers": {
+				"Location": "/publicaciones/libros"
+			}
+		},
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "/.*",
+			"dest": "/fn"
+		}
+	],
+	"overrides": {
+		"index.html": {
+			"path": ""
+		},
+		"experiencia.html": {
+			"path": "experiencia"
+		},
+		"perfil.html": {
+			"path": "perfil"
+		},
+		"programacion.html": {
+			"path": "programacion"
+		},
+		"publicaciones.html": {
+			"path": "publicaciones"
+		},
+		"publicaciones/articulos.html": {
+			"path": "publicaciones/articulos"
+		},
+		"publicaciones/capitulos.html": {
+			"path": "publicaciones/capitulos"
+		},
+		"publicaciones/libros.html": {
+			"path": "publicaciones/libros"
+		}
+	}
+}
