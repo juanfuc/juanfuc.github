@@ -93,6 +93,10 @@
   }
 
   @media (max-width: 768px) {
+
+    .container h1 {
+      font-size: 1.5em;
+    }
     .container {
       padding: 10px;
     }
