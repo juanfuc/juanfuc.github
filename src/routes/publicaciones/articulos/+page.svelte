@@ -49,7 +49,7 @@
         <p>{item.Año}</p>
         <p>{item.Páginas}</p>
         <p class='autor'>{item.Autor}</p>
-        <p class="description">{item.Descripcion}</p>
+        <!-- <p class="description">{item.Descripcion}</p> -->
       </div>
     </div>
   {/each}
@@ -139,6 +139,11 @@
   }
 
   @media (max-width: 768px) {
+
+    
+    .container h1 {
+      font-size: 1.5em;
+    }
     .card {
       flex-direction: column;
       height: auto;

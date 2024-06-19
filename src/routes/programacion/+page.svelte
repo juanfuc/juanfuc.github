@@ -38,7 +38,7 @@
     <div class="card">
       <div class="card-image">
         <!-- svelte-ignore a11y-missing-attribute -->
-        <iframe src={item.link} allowfullscreen width="621" height="513" style="border:none; overflow:hidden" loading="lazy"></iframe>
+        <iframe src={item.link} allowfullscreen style="border:none; overflow:hidden" loading="lazy"></iframe>
       </div>
       <div class="card-content">
         <h2>{item.titulo}</h2>
@@ -78,6 +78,11 @@
     padding: 10px;
   }
 
+  .card-image iframe {
+    width: 100%; /* Ajusta el iframe para que ocupe todo el ancho disponible */
+    height: auto; /* Ajusta la altura automáticamente */
+  }
+
   .card-content {
     flex: 2;
     padding: 10px;
@@ -103,6 +108,10 @@
   }
 
   @media (max-width: 768px) {
+
+    .container h1 {
+      font-size: 1.5em;
+    }
     .card {
       flex-direction: column;
       height: auto;
@@ -113,6 +122,12 @@
     .card-content {
       flex: 1;
       width: 100%;
+    }
+
+    .card-image iframe {
+      width: 100%; /* Asegura que el iframe ocupe todo el ancho disponible */
+      height: auto; /* Ajusta la altura automáticamente */
+      min-height: 200px; /* Establece una altura mínima para pantallas pequeñas */
     }
   }
 </style>

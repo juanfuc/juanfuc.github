@@ -86,8 +86,13 @@
     text-decoration: none;
   }
 
+  .link-container {
+    display: flex;
+    justify-content: space-around; /* Para que los enlaces se dispongan en fila */
+    margin-bottom: 20px;
+  }
+
   .link {
-    display: block;
     font-family: "Poppins", sans-serif;
     text-align: center;
     font-size: 2em;
@@ -99,15 +104,39 @@
   }
 
   .link:hover {
-    font-size: 2.1em;
+    text-decoration: underline;
+  }
+
+  /* Estilos para pantallas pequeñas (móviles) */
+  @media screen and (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr; /* Una sola columna para pantallas pequeñas */
+      grid-auto-rows: auto;
+    }
+
+    .link-container {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px; /* Espacio entre enlaces */
+    }
+
+    .link {
+      font-size: 1.5em; /* Tamaño de fuente más pequeño para los enlaces en móviles */
+      padding: 2px; /* Ajuste del padding */
+      margin: 2px; /* Ajuste del margen */
+      text-align: center; /* Centra el texto */
+      white-space: nowrap; /* Evita que el texto de los enlaces se divida en múltiples líneas */
+    }
   }
 </style>
 
 <div class="container">
-  <div class="grid">
+  <div class="link-container">
     <a href="/publicaciones/articulos" class="link">Artículos</a>
     <a href="/publicaciones/libros" class="link">Libros</a>
     <a href="/publicaciones/capitulos" class="link">Capítulos</a>
+  </div>
+  <div class="grid">
     {#each data as item (item.indice)}
       <div class="card">
         {#if item.link}

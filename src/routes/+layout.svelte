@@ -42,84 +42,122 @@
 </script>
 
 <style>
+/* Estilos para pantallas grandes */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1em;
+  color: #054f6d;
+  margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 450;
+  padding: 1%;
+}
+
+nav .left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 2.5em; /* Tamaño de fuente mayor para el nombre */
+}
+
+nav .icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 20px !important;
+  color: #f4ba00 !important;
+  margin-left: 10px;
+}
+
+nav .right {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.container {
+  font-family: "Montserrat", sans-serif;
+  background-color: #e6ebf1;
+  text-align: justify;
+  max-width: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 250px;
+  gap: 20px;
+}
+
+.card {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image img {
+  max-width: 100%;
+  height: auto;
+  transition: all 0.5s ease;
+  border: none;
+  filter: grayscale(100%) brightness(80%) contrast(120%);
+}
+
+.card-image img:hover {
+  box-shadow: 0 0 32px #333;
+  transform: scale(1.05);
+  filter: none;
+}
+
+nav a {
+  color: #054f6d;
+  text-decoration: none;
+  padding: 10px;
+}
+
+nav a:focus {
+  color: #f4ba00;
+}
+
+nav a:hover {
+  color: #f4ba00;
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media screen and (max-width: 768px) {
   nav {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    font-size: 1em;
-    color: #054f6d;
-    margin-bottom: 20px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 450;
-    padding: 1%;
+    font-size: 0.8em; /* Ajusta el tamaño del texto del menú para móviles */
   }
 
   nav .left {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    font-size: 2.5em; /* Tamaño de fuente mayor para el nombre */
+    align-items: center;
+    margin-bottom: 10px;
   }
 
-  nav .left .icons {
-    font-size: 20px !important;
-    color: #f4ba00 !important;
+  nav .icons {
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
   }
 
   nav .right {
-    flex: 1;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .container {
-    font-family: "Montserrat", sans-serif;
-    background-color: #e6ebf1;
-    text-align: justify;
-    max-width: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 250px;
-    gap: 20px;
+    grid-template-columns: 1fr; /* Una sola columna para pantallas pequeñas */
+    grid-auto-rows: auto;
   }
+}
 
-  .card {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .card-image img {
-    max-width: 100%;
-    height: auto;
-    transition: all 0.5s ease;
-    border: none;
-    filter: grayscale(100%) brightness(80%) contrast(120%);
-  }
-
-  .card-image img:hover {
-    box-shadow: 0 0 32px #333;
-    transform: scale(1.05);
-    filter: none;
-  }
-
-  nav a {
-    color: #054f6d;
-    text-decoration: none;
-    padding: 10px;
-  }
-
-  nav a:focus {
-    color: #f4ba00;
-  }
-
-  nav a:hover {
-    color: #f4ba00;
-  }
 </style>
 
 <nav>
@@ -145,7 +183,7 @@
 {#if isHome}
   <div class="container">
     {#if isLoading}
-      <p>Loading...</p>
+      <p>...</p>
     {:else}
       <div class="grid">
         {#each data as item (item.indice)}
