@@ -3,7 +3,6 @@
   import Icon from '@iconify/svelte';
   import { csv } from 'd3-fetch';
   import { page } from '$app/stores';
-  import { derived } from 'svelte/store';
 
   let data = [];
   let isLoading = true;
@@ -17,32 +16,24 @@
   }
 
   async function loadAndShuffleData() {
-    const cachedData = localStorage.getItem('gridData');
-    if (cachedData) {
-      data = JSON.parse(cachedData);
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZsnsur1Nec98cL4ujG9kBFmXU0TyvOtkd7TR61LsqhPuu4r7CUU-lZ9BF__cmYNHNA8rCcSsafvgq/pub?output=csv";
+    try {
+      const fetchedData = await csv(url);
+      shuffleArray(fetchedData);
+      data = fetchedData;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
       isLoading = false;
-    } else {
-      const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZsnsur1Nec98cL4ujG9kBFmXU0TyvOtkd7TR61LsqhPuu4r7CUU-lZ9BF__cmYNHNA8rCcSsafvgq/pub?output=csv";
-      try {
-        const fetchedData = await csv(url);
-        shuffleArray(fetchedData);
-        data = fetchedData;
-        localStorage.setItem('gridData', JSON.stringify(data));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        isLoading = false;
-      }
     }
   }
 
   onMount(() => {
     loadAndShuffleData();
     const lastPage = localStorage.getItem('lastPage');
-    isHome = lastPage === '/' || lastPage === null;
+    isHome = !lastPage || lastPage === '/';
   });
 
-  // Función para manejar la navegación
   function handleNavigation(event) {
     const path = event.target.getAttribute('href');
     isHome = path === '/';
@@ -72,7 +63,7 @@
 
   nav .left .icons {
     font-size: 20px !important;
-    color:#f4ba00 !important;
+    color: #f4ba00 !important;
   }
 
   nav .right {
@@ -140,7 +131,7 @@
       <a href="https://unal.academia.edu/JuanFelipeUrue%C3%B1aCalder%C3%B3n" target="_blank"><Icon icon="simple-icons:academia" /></a>
       <a href="https://www.researchgate.net/profile/Juan-Uruena" target="_blank"><Icon icon="simple-icons:researchgate" /></a>
       <a href="https://orcid.org/0000-0003-0576-159X" target="_blank"><Icon icon="simple-icons:orcid" /></a>
-      <a href="https://observablehq.com/@juanfuc " target="_blank"><Icon icon="simple-icons:observable" /></a>
+      <a href="https://observablehq.com/@juanfuc" target="_blank"><Icon icon="simple-icons:observable" /></a>
     </div>
   </div>
   <div class="right">
@@ -153,23 +144,27 @@
 
 {#if isHome}
   <div class="container">
-    <div class="grid">
-      {#each data as item (item.indice)}
-        <div class="card">
-          {#if item.link}
-            <a href={item.link} target='_blank'>
+    {#if isLoading}
+      <p>Loading...</p>
+    {:else}
+      <div class="grid">
+        {#each data as item (item.indice)}
+          <div class="card">
+            {#if item.link}
+              <a href={item.link} target='_blank'>
+                <div class="card-image">
+                  <img src={item.imagen} alt={`Publicación ${item.indice}`} loading="lazy" />
+                </div>
+              </a>
+            {:else}
               <div class="card-image">
                 <img src={item.imagen} alt={`Publicación ${item.indice}`} loading="lazy" />
               </div>
-            </a>
-          {:else}
-            <div class="card-image">
-              <img src={item.imagen} alt={`Publicación ${item.indice}`} loading="lazy" />
-            </div>
-          {/if}
-        </div>
-      {/each}
-    </div>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {/if}
   </div>
 {/if}
 
