@@ -41,11 +41,11 @@
         <iframe src={item.link} allowfullscreen style="border:none; overflow:hidden" loading="lazy"></iframe>
       </div>
       <div class="card-content">
-        <h2>{item.titulo}</h2>
+       <a href={item.link} target="_blank" style="text-decoration: none; color: #054f6d;"> <h2>{item.titulo}</h2></a>
         <p>{item.tipo}</p>
         <p>{item.fecha}</p>
         <p class='autor'>{item.autor}</p>
-        <p class="description">{item.descripcion}</p>
+        <!-- <p class="description">{item.descripcion}</p> -->
       </div>
     </div>
   {/each}
@@ -80,7 +80,7 @@
 
   .card-image iframe {
     width: 100%; /* Ajusta el iframe para que ocupe todo el ancho disponible */
-    height: auto; /* Ajusta la altura automáticamente */
+    height: 350px; /* Puedes ajustar este valor para hacer el recuadro más grande o pequeño */
   }
 
   .card-content {
@@ -88,6 +88,11 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+  }
+
+  .card-content a h2:hover {
+    text-decoration: underline;
+    color: #054f6d;
   }
 
   h1 {
