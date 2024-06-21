@@ -6,17 +6,28 @@
   let isLoading = true;
 
   async function consultarAPI() {
+    const CACHE_DURATION = 3600 * 1000; // 1 hora en milisegundos
+    const now = Date.now();
     const cachedData = localStorage.getItem('projectsData');
-    if (cachedData) {
+    const cacheTimestamp = localStorage.getItem('projectsDataTimestamp');
+
+    console.log('Cache Timestamp:', cacheTimestamp);
+    console.log('Current Time:', now);
+    console.log('Cache Duration:', CACHE_DURATION);
+
+    if (cachedData && cacheTimestamp && (now - cacheTimestamp < CACHE_DURATION)) {
+      console.log('Using cached data');
       data = JSON.parse(cachedData);
       isLoading = false;
     } else {
-      let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShkGiT3_6ivNBE2n_fkBCFoIbf2wJ50G0K3giN66uRJxnKvGrrYvlRXOBGHbnaLaqiHU_O3NzzrNRb/pub?output=csv";
-
+      console.log('Fetching new data from Google Sheets');
+      const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vShkGiT3_6ivNBE2n_fkBCFoIbf2wJ50G0K3giN66uRJxnKvGrrYvlRXOBGHbnaLaqiHU_O3NzzrNRb/pub?output=csv";
       try {
         const fetchedData = await csv(url);
+        console.log('Fetched Data:', fetchedData);
         data = fetchedData;
         localStorage.setItem('projectsData', JSON.stringify(data));
+        localStorage.setItem('projectsDataTimestamp', now);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -45,7 +56,7 @@
         <p>{item.tipo}</p>
         <p>{item.fecha}</p>
         <p class='autor'>{item.autor}</p>
-        <!-- <p class="description">{item.descripcion}</p> -->
+        <p class="description">{item.descripcion}</p>
       </div>
     </div>
   {/each}
