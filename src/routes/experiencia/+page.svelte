@@ -46,7 +46,7 @@
   <br><br>
 
   {#if isLoading}
-    <p>Cargando...</p>
+    <p></p>
   {:else}
     {#each data as item}
       <div class="card">

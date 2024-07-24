@@ -183,7 +183,7 @@ nav a:hover {
 {#if isHome}
   <div class="container">
     {#if isLoading}
-      <p>...</p>
+      <p></p>
     {:else}
       <div class="grid">
         {#each data as item (item.indice)}
